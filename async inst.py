@@ -1,61 +1,61 @@
-# import asyncio
+ import asyncio
 
-# async def func1():
-#     print('Hello, ')
-#     await asyncio.sleep(5)
-#     print('Do you?')
+ async def func1():
+print('Hello, ')
+     await asyncio.sleep(5)
+     print('Do you?')
 
-# async def func2():
-#     print('Anya')
-#     await asyncio.sleep(3)
-#     print('I love you')
+ async def func2():
+     print('Anya')
+     await asyncio.sleep(3)
+     print('I love you')
 
-# loop = asyncio.get_event_loop()
-# tasks = [loop.create_task(func1()), loop.create_task(func2())]
-# wait_here = asyncio.wait(tasks)
-# loop.run_until_complete(wait_here)
-# loop.close()
-
-
-# import time 
-# import asyncio 
-
-# start = time.time() 
+ loop = asyncio.get_event_loop()
+ tasks = [loop.create_task(func1()), loop.create_task(func2())]
+ wait_here = asyncio.wait(tasks)
+ loop.run_until_complete(wait_here)
+ loop.close()
 
 
-# def tic():
-#     return 'at %1.1f seconds' % (time.time() - start) 
+import time 
+import asyncio 
+
+start = time.time() 
 
 
-# async def gr1():# it waits for 4 sec, but we don't want to stick around...
-#     print('gr1 started work: {}'.format(tic()))
-#     await asyncio.sleep(4)
-#     print('gr1 ended work: {}'.format(tic())) 
+def tic():
+    return 'at %1.1f seconds' % (time.time() - start) 
 
 
-# async def gr2(): 
-# # it waits for 4 sec, but we don't want to stick around... 
-#     print('gr2 started work: {}'.format(tic())) 
-#     await asyncio.sleep(4) 
-#     print('gr2 Ended work: {}'.format(tic())) 
+async def gr1():# it waits for 4 sec, but we don't want to stick around...
+    print('gr1 started work: {}'.format(tic()))
+    await asyncio.sleep(4)
+    print('gr1 ended work: {}'.format(tic())) 
 
 
-# async def gr3(): 
-#     print("Let's do some stuff while the coroutines are blocked, {}".format(tic()))
-#     await asyncio.sleep(1)
-#     print('doing...')
-#     await asyncio.sleep(3) 
-#     print("Done!") 
+async def gr2(): 
+# it waits for 4 sec, but we don't want to stick around... 
+    print('gr2 started work: {}'.format(tic())) 
+    await asyncio.sleep(4) 
+    print('gr2 Ended work: {}'.format(tic())) 
 
 
-# ioloop = asyncio.get_event_loop() 
-# tasks = [ 
-# ioloop.create_task(gr1()), 
-# ioloop.create_task(gr2()), 
-# ioloop.create_task(gr3()) 
-# ] 
-# ioloop.run_until_complete(asyncio.wait(tasks)) 
-# ioloop.close()
+async def gr3(): 
+    print("Let's do some stuff while the coroutines are blocked, {}".format(tic()))
+    await asyncio.sleep(1)
+    print('doing...')
+    await asyncio.sleep(3) 
+    print("Done!") 
+
+
+ioloop = asyncio.get_event_loop() 
+tasks = [ 
+ioloop.create_task(gr1()), 
+ioloop.create_task(gr2()), 
+ioloop.create_task(gr3()) 
+] 
+ioloop.run_until_complete(asyncio.wait(tasks)) 
+ioloop.close()
 
 
 # import random 
@@ -94,39 +94,39 @@
 # ioloop.close()
 
 
-import time 
-import random 
-import asyncio 
-import aiohttp 
+# import time 
+# import random 
+# import asyncio 
+# import aiohttp 
 
-URL = 'https://api.github.com/events' 
-MAX_CLIENTS = 3 
+# URL = 'https://api.github.com/events' 
+# MAX_CLIENTS = 3 
 
 
-async def fetch_async(pid):
-    start = time.time()
-    sleepy_time = random.randint(2, 5)
-    print('Fetch async process {} started, sleeping for {} seconds'.format(pid, sleepy_time))
+# async def fetch_async(pid):
+#     start = time.time()
+#     sleepy_time = random.randint(2, 5)
+#     print('Fetch async process {} started, sleeping for {} seconds'.format(pid, sleepy_time))
     
-    await asyncio.sleep(sleepy_time)
+#     await asyncio.sleep(sleepy_time)
 
-    response = await aiohttp.request('GET', URL)
-    datetime = response.headers.get('Date')
+#     response = await aiohttp.request('GET', URL)
+#     datetime = response.headers.get('Date')
     
-    response.close()
-    return 'Process {}: {}, took: {:.2f} seconds'.format(pid, datetime, time.time() - start) 
+#     response.close()
+#     return 'Process {}: {}, took: {:.2f} seconds'.format(pid, datetime, time.time() - start) 
 
 
-async def asynchronous():
-    start = time.time()
-    futures = [fetch_async(i) for i in range(1, MAX_CLIENTS + 1)]
-    for i, future in enumerate(asyncio.as_completed(futures)):
-        result = await future
-        print('{} {}'.format("»" * (i + 1), result))
+# async def asynchronous():
+#     start = time.time()
+#     futures = [fetch_async(i) for i in range(1, MAX_CLIENTS + 1)]
+#     for i, future in enumerate(asyncio.as_completed(futures)):
+#         result = await future
+#         print('{} {}'.format("»" * (i + 1), result))
         
-        print("Process took: {:.2f} seconds".format(time.time() - start)) 
+#         print("Process took: {:.2f} seconds".format(time.time() - start)) 
 
 
-ioloop = asyncio.get_event_loop() 
-ioloop.run_until_complete(asynchronous()) 
-ioloop.close()
+# ioloop = asyncio.get_event_loop() 
+# ioloop.run_until_complete(asynchronous()) 
+# ioloop.close()
