@@ -1,20 +1,23 @@
  import asyncio
 
- async def func1():
-print('Hello, ')
-     await asyncio.sleep(5)
-     print('Do you?')
+t = (6, 4, 2)
+result = sum (t)
 
- async def func2():
-     print('Anya')
-     await asyncio.sleep(3)
-     print('I love you')
+async def fir():
+    print (t[0])
+    await asyncio.sleep(5)
+    print (result) 
 
- loop = asyncio.get_event_loop()
- tasks = [loop.create_task(func1()), loop.create_task(func2())]
- wait_here = asyncio.wait(tasks)
- loop.run_until_complete(wait_here)
- loop.close()
+async def sec():
+    print (t[1])
+    await asyncio.sleep(3)
+    print (t[2])
+
+loop = asyncio.get_event_loop()
+tasks = [loop.create_task(fir()), loop.create_task(sec())]
+wait_here = asyncio.wait(tasks)
+loop.run_until_complete(wait_here)
+loop.close()
 
 
 import time 
